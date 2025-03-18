@@ -13,7 +13,7 @@ class Chain<K, V> {
     public void put(K key, V value) {
         int index = key.hashCode() % table.length;
         table[index].add(new Entry<>(key, value));
-        System.out.println("Inserted key: " + key + " at index: " + index);
+        System.out.println("Key yang di insert: " + key + " pada index: " + index);
     }
 
     public V get(K key) {

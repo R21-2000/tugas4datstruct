@@ -29,7 +29,7 @@ public class QuadProb<K, V> {
         values[index] = value;
         size++;
 
-        System.out.println("Inserted key: " + key + " at index: " + index + " with " + probeCount + " probes.");
+        System.out.println("Key yang di insert: " + key + " pada index: " + index + " dengan " + probeCount + " prob.");
     }
 
     public V get(K key) {
