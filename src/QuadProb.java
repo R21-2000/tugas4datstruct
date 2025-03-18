@@ -16,15 +16,12 @@ public class QuadProb<K, V> {
     public void put(K key, V value) {
         int index = hashFunction(key);
         int probeCount = 0;
-        int i = 1;
+        int i = 0;
 
         while (keys[index] != null) {
-            if (keys[index].equals(key)) {
-                values[index] = value; // Update value if key exists
-                return;
-            }
+            // Reverse linear probing
+            index = (index - i * i + keys.length) % keys.length;
             probeCount++;
-            index = (index + i * i) % keys.length; // Quadratic probing
             i++;
         }
 
@@ -32,27 +29,31 @@ public class QuadProb<K, V> {
         values[index] = value;
         size++;
 
-        System.out.println("Inserted " + key + " at index " + index + " with " + probeCount + " probes.");
+        System.out.println("Inserted key: " + key + " at index: " + index + " with " + probeCount + " probes.");
     }
 
     public V get(K key) {
         int index = hashFunction(key);
-        int i = 1;
+        int probeCount = 0;
+        int i = 0;
 
         while (keys[index] != null) {
             if (keys[index].equals(key)) {
                 return values[index];
             }
-            index = (index + i * i) % keys.length; // Quadratic probing
+            // Reverse linear probing
+            index = (index - i * i + keys.length) % keys.length;
+            probeCount++;
             i++;
         }
-        return null; // Key not found
+
+        return null; // Not found
     }
 
     public void displayHashTable() {
-        System.out.println("Hash Table:");
+        System.out.println("Index\tKey\tValue");
         for (int i = 0; i < keys.length; i++) {
-            System.out.println(i + ": " + keys[i] + " -> " + values[i]);
+            System.out.println(i + "\t" + keys[i] + "\t" + values[i]);
         }
     }
 }

@@ -18,36 +18,38 @@ public class LinearProb<K, V> {
         int probeCount = 0;
 
         while (keys[index] != null) {
-            if (keys[index].equals(key)) {
-                values[index] = value; // Update value if key exists
-                return;
-            }
+            // Reverse linear probing
+            index = (index - 1 + keys.length) % keys.length;
             probeCount++;
-            index = (index + 1) % keys.length; // Linear probing
         }
 
         keys[index] = key;
         values[index] = value;
         size++;
 
-        System.out.println("Inserted " + key + " at index " + index + " with " + probeCount + " probes.");
+        System.out.println("Inserted key: " + key + " at index: " + index + " with " + probeCount + " probes.");
     }
 
     public V get(K key) {
         int index = hashFunction(key);
+        int probeCount = 0;
+
         while (keys[index] != null) {
             if (keys[index].equals(key)) {
                 return values[index];
             }
-            index = (index + 1) % keys.length; // Linear probing
+            // Reverse linear probing
+            index = (index - 1 + keys.length) % keys.length;
+            probeCount++;
         }
-        return null; // Key not found
+
+        return null; // Not found
     }
 
     public void displayHashTable() {
-        System.out.println("Hash Table:");
+        System.out.println("Index\tKey\tValue");
         for (int i = 0; i < keys.length; i++) {
-            System.out.println(i + ": " + keys[i] + " -> " + values[i]);
+            System.out.println(i + "\t" + keys[i] + "\t" + values[i]);
         }
     }
 }

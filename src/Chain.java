@@ -1,6 +1,6 @@
 import java.util.LinkedList;
 
-public class Chain<K, V> {
+class Chain<K, V> {
     private LinkedList<Entry<K, V>>[] table;
 
     public Chain(int capacity) {
@@ -10,40 +10,28 @@ public class Chain<K, V> {
         }
     }
 
-    private int hashFunction(K key) {
-        return key.hashCode() % table.length;
-    }
-
     public void put(K key, V value) {
-        int index = hashFunction(key);
-        for (Entry<K, V> entry : table[index]) {
-            if (entry.key.equals(key)) {
-                entry.value = value; // Update value if key exists
-                return;
-            }
-        }
+        int index = key.hashCode() % table.length;
         table[index].add(new Entry<>(key, value));
-        System.out.println("Inserted " + key + " at index " + index);
+        System.out.println("Inserted key: " + key + " at index: " + index);
     }
 
     public V get(K key) {
-        int index = hashFunction(key);
+        int index = key.hashCode() % table.length;
         for (Entry<K, V> entry : table[index]) {
             if (entry.key.equals(key)) {
                 return entry.value;
             }
         }
-        return null; // Key not found
+        return null; // Not found
     }
 
     public void displayHashTable() {
-        System.out.println("Hash Table:");
+        System.out.println("Index\tKey\tValue");
         for (int i = 0; i < table.length; i++) {
-            System.out.print(i + ": ");
             for (Entry<K, V> entry : table[i]) {
-                System.out.print(entry.key + " -> " + entry.value + " | ");
+                System.out.println(i + "\t" + entry.key + "\t" + entry.value);
             }
-            System.out.println();
         }
     }
 
