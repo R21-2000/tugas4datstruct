@@ -1,56 +1,41 @@
-class Student {
-    private int nim;
-    private String nama;
-
-    Student(int nim, String nama) {
-        this.nim = nim;
-        this.nama = nama;
-    }
-
-    @Override
-    public String toString() {
-        return Integer.toString(nim) + " - " + nama;
-    }
-}
-
 public class ProgramMain {
     public static void main(String[] args) {
-        // Contoh penggunaan Linear Probing
+        // Implementasi Linear Probing disini
         LinearProb<Integer, String> linearHash = new LinearProb<>(10);
 
-        // Data yang akan dimasukkan
+        // Data yang kita punya
         int[] data = {4371, 1323, 6173, 4199, 4344, 9679, 1989};
 
-        // Memasukkan data ke dalam tabel hash
+        // Input data yang kita punya ke table hashnya
         for (int key : data) {
             linearHash.put(key, Integer.toString(key));
         }
 
-        // Menampilkan hasil tabel hash
-        System.out.println("Linear Probing Hash Table:");
-        linearHash.displayHashTable();
+        // Show hasil dari tabel hash
+        System.out.println("\nLinear Probing Hash Table:");
+        linearHash.Displaytabelhash();
         System.out.println();
 
-        // Contoh penggunaan Quadratic Probing
+        // Implementasi Quadratic Probing
         QuadProb<Integer, String> quadraticHash = new QuadProb<>(10);
         for (int key : data) {
             quadraticHash.put(key, Integer.toString(key));
         }
 
-        // Menampilkan hasil tabel hash
-        System.out.println("Quadratic Probing Hash Table:");
-        quadraticHash.displayHashTable();
+        // show hasil dari tabel hash
+        System.out.println("\nQuadratic Probing Hash Table:");
+        quadraticHash.Displaytabelhash();
         System.out.println();
 
-        // Contoh penggunaan Separate Chaining
+        // Implementasi Separate Chaining
         Chain<Integer, String> chainingHash = new Chain<>(10);
         for (int key : data) {
             chainingHash.put(key, Integer.toString(key));
         }
 
-        // Menampilkan hasil tabel hash
-        System.out.println("Separate Chaining Hash Table:");
-        chainingHash.displayHashTable();
+        // Show hasil dari tabel hash
+        System.out.println("\nSeparate Chaining Hash Table:");
+        chainingHash.Displaytabelhash();
         System.out.println();
     }
 }
